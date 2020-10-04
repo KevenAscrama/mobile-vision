@@ -431,8 +431,9 @@ for i in range(1,total+1):
     sess = tf.compat.v1.Session(config=config)
     tf.compat.v1.keras.backend.set_session(sess)
     # output = model(img)
-    with tf.compat.v1.Session() as sess:
-        sess.run(model(img))
+    output = model.predict(img) # ERROR: Fused conv implementation does not support grouped convolutions for now.
+    # with tf.compat.v1.Session() as sess:
+    #     sess.run(model(img))
         # print('output = ',output)
         # # predictions = model.predict(img)
         # print ('output shape = ', output.shape)# [1, 1000]
@@ -477,34 +478,4 @@ for i in range(1,total+1):
 # incarnation: 2705339757748930799
 # physical_device_desc: "device: XLA_GPU device"
 # ]
-
-
-
-# image = cv2.imread('./test_image/1.JPEG')
-# img = cv2.cvtColor(image,cv2.COLOR_RGB2GRAY) # RGB图像转为gray
-
-#  #需要用reshape定义出例子的个数，图片的 通道数，图片的长与宽。具体的参加keras文档
-# img = (img.reshape(1, 224, 224, 3)).astype('int32')/255 
-# predict = model.predict_classes(img)
-# print ('predict: ')
-# print (predict)
-
-# cv2.imshow("Image1", image)
-# cv2.waitKey(0)
-
-
-# # Load TFLite model and allocate tensors.
-# interpreter = tf.lite.Interpreter(model_path="./my_keras_model_optimize_float16.tflite")
-# interpreter.allocate_tensors()
-
-# input_details = interpreter.get_input_details()
-# output_details = interpreter.get_output_details()
-
-# print(input_details)
-# print(output_details)
-
-
-
-
-
 
