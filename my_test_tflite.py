@@ -20,7 +20,7 @@ from torchvision import models
 
 # Load TFLite model and allocate tensors.
 interpreter = tf.lite.Interpreter(model_path="./my_keras_model_optimize_float16.tflite")
-interpreter.allocate_tensors()
+interpreter.allocate_tensors() # ERROR: the channel 48 which is the first group convolution layer get an error
 
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
